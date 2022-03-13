@@ -25,11 +25,9 @@ app.use(express.json())
 const {
     usersRoutes,
     generateToken,
-    redisRoutes
 } = require('./src/routes');
 app.use('/users', usersRoutes)
 app.use('/create', generateToken)
-app.use('/redis', redisRoutes)
 
 app.all('*', (req, res) => {
     res.status(404).json({ message: 'Not Found' });

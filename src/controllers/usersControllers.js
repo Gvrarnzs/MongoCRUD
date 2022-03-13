@@ -1,14 +1,30 @@
 const User = require("../../models/users")
+const {createClient} = require('redis')
+const DEFAULT_EXPIRATION = 3600
 
+const redisClient = createClient()
 
 
 module.exports = {
     getUser: async (req,res) => {
         try {
-            const user = await User.find()
-            // hasilnya array
-            return res.status(200).send(user)
+            await redisClient.connect()
+            const value = await redisClient.get("users")
+            if (value != null){
+                console.log("tidak tarik data ke mongo")
+                await redisClient.disconnect()
+                return res.status(200).send(JSON.parse(value))
+            } else {
+                console.log("tarik ke mongo")
+                const user = await User.find()
+                await redisClient.setEx('users',DEFAULT_EXPIRATION, JSON.stringify(user))
+                // hasilnya array
+                await redisClient.disconnect()
+                return res.status(200).send(user)
+            }
         } catch (error) {
+            await redisClient.disconnect()
+            console.log("masuk sini")
             res.status(500).json({message: error.message})
         }
     },
@@ -33,23 +49,49 @@ module.exports = {
     },
     getUserByAccount: async(req,res) => {
         try {
-            const user = await User.findOne({accountNumber : req.params.id})
-            if (user == null){
-                return res.status(404).send({message: 'Cannot Find User Account Number'})
+            await redisClient.connect()
+            const value = await redisClient.get(`${req.params.id}`)
+            if (value != null){
+                console.log("tidak tarik data ke mongo")
+                await redisClient.disconnect()
+                return res.status(200).send(JSON.parse(value))
+            } else {
+                console.log("tarik ke mongo")
+                const user = await User.findOne({accountNumber : req.params.id})
+                if (!user){
+                    throw {message: 'Cannot Find User Account Number Number'}
+                }
+                await redisClient.setEx(`${req.params.id}`,DEFAULT_EXPIRATION, JSON.stringify(user))
+                // hasilnya array
+                await redisClient.disconnect()
+                return res.status(200).send(user)
             }
-            return res.status(200).send(user)
         } catch (error) {
+            await redisClient.disconnect()
             res.status(500).json({message: error.message})
         }
     },
     getUserByIdentity: async(req,res) => {
         try {
-            const user = await User.findOne({identityNumber : req.params.id})
-            if (!user){
-                throw {message: 'Cannot Find User Identity Number'}
+            await redisClient.connect()
+            const value = await redisClient.get(`${req.params.id}`)
+            if (value != null){
+                console.log("tidak tarik data ke mongo")
+                await redisClient.disconnect()
+                return res.status(200).send(JSON.parse(value))
+            } else {
+                console.log("tarik ke mongo")
+                const user = await User.findOne({identityNumber : req.params.id})
+                if (!user){
+                    throw {message: 'Cannot Find User Identity Number'}
+                }
+                await redisClient.setEx(`${req.params.id}`,DEFAULT_EXPIRATION, JSON.stringify(user))
+                // hasilnya array
+                await redisClient.disconnect()
+                return res.status(200).send(user)
             }
-            return res.status(200).send(user)
         } catch (error) {
+            await redisClient.disconnect()
             res.status(500).json({message: error.message})
         }
     },

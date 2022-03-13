@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvd
 Content-Type: application/json
 
 ### GET TEST by identity Number
-GET http://localhost:2003/users/byidentity/70707 HTTP/1.1
+GET http://localhost:2003/users/byidentity/60606 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
 Content-Type: application/json
 
@@ -48,18 +48,3 @@ Content-Type: application/json
     "emailAddress" : "Sutisno",
     "userName" : "Suparno"
 } 
-
-### Test Redis Verif
-GET http://localhost:2003/redis/userlist HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE4MTQyNywiZXhwIjoxNjQ3MjI0NjI3fQ.YX6vQpp7x4mM8gnnuNX-9C7ZpmvtLfU6Eq6BE9FLIYc
-Content-Type: application/json
-
-### GET TEST by identity Number Redis
-GET http://localhost:2003/redis/byidentity/60606 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
-Content-Type: application/json
-
-### GET TEST by account Number
-GET http://localhost:2003/redis/byaccnumber/201 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
-Content-Type: application/json
