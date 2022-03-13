@@ -1,0 +1,65 @@
+### GET TEST
+GET http://localhost:2003/users/userlist HTTP/1.1
+Content-Type: application/json
+
+###Post Test
+POST http://localhost:2003/users/createuser HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+{
+    "id" : 3,
+    "userName" : "Third User",
+    "accountNumber": 931,
+    "emailAddress" : "Third@usertest@",
+    "identityNumber": 70707
+} 
+
+### Generate Token
+GET http://localhost:2003/create/token HTTP/1.1
+Content-Type: application/json
+
+### Test Verification
+GET http://localhost:2003/users/userlist HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+### GET TEST by account Number
+GET http://localhost:2003/users/byaccnumber/201 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+### GET TEST by identity Number
+GET http://localhost:2003/users/byidentity/70707 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+### Delete TEST by ID
+DELETE  http://localhost:2003/users/delete/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+###Patch Test
+PATCH  http://localhost:2003/users/update/55 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+{
+    "emailAddress" : "Sutisno",
+    "userName" : "Suparno"
+} 
+
+### Test Redis Verif
+GET http://localhost:2003/redis/userlist HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE4MTQyNywiZXhwIjoxNjQ3MjI0NjI3fQ.YX6vQpp7x4mM8gnnuNX-9C7ZpmvtLfU6Eq6BE9FLIYc
+Content-Type: application/json
+
+### GET TEST by identity Number Redis
+GET http://localhost:2003/redis/byidentity/60606 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
+
+### GET TEST by account Number
+GET http://localhost:2003/redis/byaccnumber/201 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcm90ZWN0IjoicHJvdGVjdGlvbiIsImlhdCI6MTY0NzE2NjYyMywiZXhwIjoxNjQ3MjA5ODIzfQ.r1yLTNfz952S7oZGyg4gMjMoeGpqs_mOl5tp9atnGRQ
+Content-Type: application/json
