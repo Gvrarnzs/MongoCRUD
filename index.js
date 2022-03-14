@@ -1,7 +1,7 @@
 require ("dotenv").config()
 const express = require('express');
 const app = express()
-const PORT = process.env.PORT || 2003
+const PORT = process.env.PORT || 3000
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bearer = require('express-bearer-token')
@@ -22,6 +22,7 @@ app.use(bearer());
 app.use(express.json())
 
 
+app.get("/",(req, res) => res.send('Hello BTPN!'));
 const {
     usersRoutes,
     generateToken,
